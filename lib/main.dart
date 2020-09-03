@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp>{
         'answers': [
             {'text': 'Coke', 'score': 10}, 
             {'text': 'Coffee', 'score': 1},  
-            {'text': 'Juice', 'score': 5},  
-            {'text': 'Milk', 'score': 8}, 
+            {'text': 'Juice', 'score': 6},  
+            {'text': 'Milk', 'score': 5}, 
           ],
       },
       {
@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp>{
     ];
   var _counter = 0;
   var totalScore = 0;
+  var previous = 0;
 
   void resetGame(){
     setState(() {
@@ -68,7 +69,13 @@ class _MyAppState extends State<MyApp>{
       _counter += 1;
     });
     totalScore += score;
-    print(_counter);
+    previous = score;
+  }
+  void _back(){
+    setState((){
+      _counter -= 1;
+    });
+    totalScore -= previous;
   }
 
   Widget build(BuildContext context){
@@ -78,11 +85,12 @@ class _MyAppState extends State<MyApp>{
       home: Scaffold(
       appBar: AppBar(
         title: Text("Progrunner"),
-        ),
+      ), 
       body: _counter < questions.length ? Quiz(
           questions: questions, 
           answeredQuestion: _answeredQuestion, 
           counter: _counter,
+          back: _back,
         ) : Result(totalScore, resetGame),
     ));
   }

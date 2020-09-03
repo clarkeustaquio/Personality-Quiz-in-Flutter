@@ -8,7 +8,7 @@ class Result extends StatelessWidget{
 
   String get totalPhrase{
     String resultText;
-    if (score < 6){
+    if (score < 10){
       resultText = "Certified Programmer";
     }else{
       resultText = "You are Human Congrats!";
@@ -24,6 +24,19 @@ class Result extends StatelessWidget{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Column(
+            children: [
+              Text(
+                'Your score: $score',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text('Score less than 10: Certified Programmer'),
+              Text('Score greater than 10: You are Human, Congrats!'),
+              Divider(),
+            ],
+          ),
           Text(
             totalPhrase,
             style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
